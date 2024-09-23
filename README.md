@@ -221,10 +221,10 @@ day_time = "Sunday-09:00 AM to 01:00 PM"
 batch = "61"
 
 # Paths to images and font
-background_image_path = 'background.jpeg'
-card_holder_image_path = 'card_holder.jpg'
-logo_image_path = 'piaic_logo.png'
-font_path = 'Arial.ttf'
+background_image_path = '/content/bk.jpeg'
+card_holder_image_path = '/content/ameer hamza pic.jpg'
+logo_image_path = '/content/PIAIC_Logo_h-removebg-preview.png'
+font_path = '/content/Arial.ttf'
 
 # Create a blank ID card
 card_width, card_height = 600, 400
@@ -241,9 +241,7 @@ id_card.putalpha(rounded_card)
 
 # Add background image
 background = Image.open(background_image_path).resize((card_width, card_height)).convert("RGBA")
-id_card.paste(background, (0, 0), mask=
-
-rounded_card)
+id_card.paste(background, (0, 0), mask=rounded_card)
 
 # Add card holder image
 card_holder_image = Image.open(card_holder_image_path).convert("RGBA")
@@ -267,29 +265,32 @@ id_card.paste(logo, logo_position, logo)
 
 # Load fonts
 try:
-    label_font = ImageFont.truetype("Arial-Bold.ttf", 40)
+    label_font = ImageFont.truetype("Arial-Bold.ttf", 50)  # Increased font size for more boldness
 except OSError:
     label_font = ImageFont.load_default()
-    
+
 try:
-    font = ImageFont.truetype(font_path, 24)
+    font = ImageFont.truetype(font_path, 24)  # Regular font for student details
 except OSError:
     font = ImageFont.load_default()
 
-# Add title
+# Add title with bold effect
 draw = ImageDraw.Draw(id_card)
 piaic_label = "PIAIC ID Card"
 label_bbox = draw.textbbox((0, 0), piaic_label, font=label_font)
 text_width = label_bbox[2] - label_bbox[0]
 label_x = (card_width - text_width) // 2
-label_y = 10
-draw.text((label_x, label_y), piaic_label, font=label_font, fill="black")
+label_y = 20  # Adjust Y position to reduce space between title and details
+
+# Draw the text with stroke effect for boldness
+stroke_width = 2  # Stroke to make the text more prominent
+draw.text((label_x, label_y), piaic_label, font=label_font, fill="black", stroke_width=stroke_width, stroke_fill="white")
 
 # Add student info
 padding = 30
 text_x = padding
-text_y = 100
-line_spacing = 40
+text_y = label_y + 50  # Adjust to decrease space between title and details
+line_spacing = 35  # Adjust line spacing for less gap between lines
 text_labels = [
     f"Name: {name}",
     f"Roll No: {rollno}",
@@ -309,7 +310,7 @@ for line in text_labels:
 output_path = "PIAIC_ID_card.png"
 id_card.save(output_path)
 id_card.show()
-```
+
 
 ### Conclusion:
 
