@@ -312,8 +312,3 @@ id_card.save(output_path)
 id_card.show()
 
 
-
-
-### Conclusion:
-
-By following this tutorial, you have successfully created a PIAIC Student ID card with custom text, images, and styles. You can further modify the card design as per your needs, such as adding additional information, changing fonts, or experimenting with different layouts.
